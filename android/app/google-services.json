@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "690108574241",
+    "project_id": "green-armor",
+    "storage_bucket": "green-armor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690108574241:android:1d4cc6eb56f16e21be5160",
+        "android_client_info": {
+          "package_name": "com.example.green_armor_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690108574241-pmmh0i7qkoog5u1n0aqnm2cgb6h7g839.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL8s_qPNda4rm_dM5iopPoVLDExBEflzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690108574241-pmmh0i7qkoog5u1n0aqnm2cgb6h7g839.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
