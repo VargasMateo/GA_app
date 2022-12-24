@@ -5,75 +5,54 @@ import 'package:location/location.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/responsive.dart';
+import '../services/widgets.dart';
 
-const verde_oscuro = const Color(0xFF013c21);
-const verde_medio = Color.fromARGB(255, 13, 124, 54);
-const verde_claro = Color.fromARGB(255, 19, 192, 88);
-const amarillo_oscuro = const Color(0xFFd8ad01);
-const amarillo_medio = const Color(0xFFddbe43);
-const amarillo_claro = const Color(0xFFedd273);
-const blanco = const Color(0xFFffffff);
-const negro = const Color(0xFF101010);
-const gris = const Color(0xFF767676);
-const rojo = const Color(0xFFe83845);
 
-class pagina_principal extends StatefulWidget {
-  pagina_principal({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
   @override
-  State<pagina_principal> createState() => _pagina_principalState();
+  State<Home> createState() => _HomeState();
 }
 
-class _pagina_principalState extends State<pagina_principal> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
-            children: [
-              Container(
-                constraints: const BoxConstraints(maxHeight: 30, maxWidth: 30),
-                child: Image.asset('assets/GA_dorado.png'),
-              ),
-              const SizedBox(width: 5),
-              const Text('GREEN',
-                  style: TextStyle(color: blanco, fontWeight: FontWeight.bold)),
-              const Text('ARMOR',
-                  style: TextStyle(
-                      color: amarillo_oscuro, fontWeight: FontWeight.bold)),
-            ],
-          ),
-          backgroundColor: verde_oscuro,
+          title: appBarPersonalizado('GREEN', 'ARMOR'),
+          backgroundColor: verdeOscuro,
         ),
         body: SafeArea(
           child: GridView.count(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+              padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.04, vertical: SizeConfig.screenWidth * 0.04),
               crossAxisCount: 2,
-              crossAxisSpacing: 18,
-              mainAxisSpacing: 18,
-              children: [
-                ALERTA(titulo: 'ALERTA', color: verde_oscuro),
-                DETALLES_OBJETIVO(
+              crossAxisSpacing: SizeConfig.screenWidth * 0.04,
+              mainAxisSpacing: SizeConfig.screenWidth * 0.04,
+              children: const [
+                 ALERTA(titulo: 'ALERTA', color: verdeOscuro),
+                 DETALLES_OBJETIVO(
                     titulo: 'DETALLES OBJETIVO',
-                    color: amarillo_oscuro,
-                    redireccion: '/detalles_objetivo'),
-                NOVEDADES(
+                    color: amarilloOscuro,
+                    redireccion: '/DetallesObjetivo'),
+                 NOVEDADES(
                     titulo: 'NOVEDADES',
-                    color: verde_medio,
-                    redireccion: '/novedades'),
-                INICIAR_RONDA(
+                    color: verdeMedio,
+                    redireccion: '/Novedades'),
+                 INICIAR_RONDA(
                     titulo: 'INICIAR RONDA',
-                    color: amarillo_medio,
+                    color: amarilloMedio,
                     redireccion: '/nfc_manager'),
-                CHECKPOINT(titulo: 'CHECKPOINT', color: verde_claro),
+                 CHECKPOINT(titulo: 'CHECKPOINT', color: verdeClaro),
                 HOMBRE_VIVO(
                   titulo: 'HOMBRE VIVO',
-                  color: amarillo_claro,
+                  color: amarilloClaro,
                 ),
               ]),
         ),
-        drawer: DRAWER(usuario: 'Osvaldo Leites', rango: 'Empleado'),
+        drawer: const DRAWER(usuario: 'Osvaldo Leites', rango: 'Empleado'),
       ),
     );
   }
@@ -82,7 +61,7 @@ class _pagina_principalState extends State<pagina_principal> {
 class ALERTA extends StatefulWidget {
   final String titulo;
   final Color color;
-  ALERTA({Key? key, required this.titulo, required this.color})
+  const ALERTA({Key? key, required this.titulo, required this.color})
       : super(key: key);
 
   @override
@@ -108,15 +87,15 @@ class _ALERTAState extends State<ALERTA> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(
-            IconData(0xe087, fontFamily: 'MaterialIcons'),
+          Icon(
+            const IconData(0xe087, fontFamily: 'MaterialIcons'),
             color: blanco,
-            size: 50,
+            size: SizeConfig.screenWidth * 0.15,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: const TextStyle(fontSize: 20, color: blanco),
+            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -127,10 +106,11 @@ class _ALERTAState extends State<ALERTA> {
           builder: (context) => AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(18.0))),
-            icon: const Icon(Icons.warning_amber_outlined, size: 60),
-            title: const Text(
-              '¿Está seguro que desea enviar una alerta?',
+            icon: Icon(Icons.warning_amber_outlined, size: SizeConfig.screenWidth * 0.18),
+            title: Text(
+              '¿Está seguro que desea enviar una alerta?', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
               textAlign: TextAlign.center,
+              
             ),
             elevation: 2,
             actions: [
@@ -139,17 +119,17 @@ class _ALERTAState extends State<ALERTA> {
                 children: [
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: verde_oscuro,
+                        backgroundColor: verdeOscuro,
                         alignment: Alignment.center,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Cancelar')),
-                  const SizedBox(width: 20),
+                      child: Text('Cancelar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04),)),
+                  SizedBox(width: SizeConfig.screenWidth * 0.05),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: verde_oscuro,
+                        backgroundColor: verdeOscuro,
                         alignment: Alignment.center,
                       ),
                       onPressed: () {
@@ -158,7 +138,7 @@ class _ALERTAState extends State<ALERTA> {
                         alertaEnviada = true;
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Aceptar')),
+                      child: Text('Aceptar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))),
                 ],
               ),
             ],
@@ -172,9 +152,9 @@ class _ALERTAState extends State<ALERTA> {
             builder: (context) => AlertDialog(
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(18.0))),
-              icon: const Icon(Icons.cancel_outlined, size: 60),
-              title: const Text(
-                '¿Desea cancelar la Alerta enviada?',
+              icon: Icon(Icons.cancel_outlined, size: SizeConfig.screenWidth * 0.18),
+              title: Text(
+                '¿Desea cancelar la Alerta enviada?', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
                 textAlign: TextAlign.center,
               ),
               elevation: 2,
@@ -184,17 +164,17 @@ class _ALERTAState extends State<ALERTA> {
                   children: [
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: verde_oscuro,
+                          backgroundColor: verdeOscuro,
                           alignment: Alignment.center,
                         ),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Cancelar')),
-                    const SizedBox(width: 20),
+                        child: Text('Cancelar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))),
+                    SizedBox(width: SizeConfig.screenWidth * 0.05),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: verde_oscuro,
+                          backgroundColor: verdeOscuro,
                           alignment: Alignment.center,
                         ),
                         onPressed: () {
@@ -204,7 +184,7 @@ class _ALERTAState extends State<ALERTA> {
                           //cancelarAlerta();
                           Navigator.of(context).pop();
                         },
-                        child: const Text('Aceptar')),
+                        child: Text('Aceptar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))),
                   ],
                 ),
               ],
@@ -241,7 +221,7 @@ class DETALLES_OBJETIVO extends StatefulWidget {
   final String titulo;
   final Color color;
   final String redireccion;
-  DETALLES_OBJETIVO(
+  const DETALLES_OBJETIVO(
       {Key? key,
       required this.titulo,
       required this.color,
@@ -266,15 +246,15 @@ class _DETALLES_OBJETIVOState extends State<DETALLES_OBJETIVO> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(
-            IconData(0xe0a5, fontFamily: 'MaterialIcons'),
+           Icon(
+            const IconData(0xe0a5, fontFamily: 'MaterialIcons'),
             color: blanco,
-            size: 50,
+            size: SizeConfig.screenWidth * 0.15,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: const TextStyle(fontSize: 20, color: blanco),
+            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -292,7 +272,7 @@ class NOVEDADES extends StatefulWidget {
   final String titulo;
   final Color color;
   final String redireccion;
-  NOVEDADES(
+  const NOVEDADES(
       {Key? key,
       required this.titulo,
       required this.color,
@@ -317,15 +297,15 @@ class _NOVEDADESState extends State<NOVEDADES> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(
-            IconData(0xf614, fontFamily: 'MaterialIcons'),
+           Icon(
+            const IconData(0xf614, fontFamily: 'MaterialIcons'),
             color: blanco,
-            size: 50,
+            size: SizeConfig.screenWidth * 0.15,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: const TextStyle(fontSize: 20, color: blanco),
+            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -343,7 +323,7 @@ class INICIAR_RONDA extends StatefulWidget {
   final String titulo;
   final Color color;
   final String redireccion;
-  INICIAR_RONDA(
+  const INICIAR_RONDA(
       {Key? key,
       required this.titulo,
       required this.color,
@@ -368,15 +348,15 @@ class _INICIAR_RONDAState extends State<INICIAR_RONDA> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Icon(
-            IconData(0xf04c5, fontFamily: 'MaterialIcons'),
+           Icon(
+            const IconData(0xf04c5, fontFamily: 'MaterialIcons'),
             color: blanco,
-            size: 50,
+            size: SizeConfig.screenWidth * 0.15,
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: const TextStyle(fontSize: 20, color: blanco),
+            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -393,7 +373,7 @@ class _INICIAR_RONDAState extends State<INICIAR_RONDA> {
 class CHECKPOINT extends StatefulWidget {
   final String titulo;
   final Color color;
-  CHECKPOINT({
+  const CHECKPOINT({
     Key? key,
     required this.titulo,
     required this.color,
@@ -422,15 +402,15 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(
-                    IconData(0xe7ab, fontFamily: 'MaterialIcons'),
+                   Icon(
+                    const IconData(0xe7ab, fontFamily: 'MaterialIcons'),
                     color: blanco,
-                    size: 50,
+                    size: SizeConfig.screenWidth * 0.15,
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Text(
                     widget.titulo,
-                    style: const TextStyle(fontSize: 20, color: blanco),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -451,15 +431,15 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(
-                    IconData(0xe7ab, fontFamily: 'MaterialIcons'),
+                   Icon(
+                    const IconData(0xe7ab, fontFamily: 'MaterialIcons'),
                     color: blanco,
-                    size: 50,
+                    size: SizeConfig.screenWidth * 0.15,
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Text(
                     widget.titulo,
-                    style: const TextStyle(fontSize: 20, color: blanco),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -471,8 +451,8 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(18.0))),
                     backgroundColor: Colors.white,
-                    title: const Text(
-                      '¿Qué desea escanear?',
+                    title: Text(
+                      '¿Qué desea escanear?', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
                       textAlign: TextAlign.center,
                     ),
                     elevation: 2,
@@ -482,23 +462,23 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
                         children: [
                           ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: verde_oscuro,
+                                backgroundColor: verdeOscuro,
                                 alignment: Alignment.center,
                               ),
                               onPressed: () {
                                 _scanQR();
                               },
                               child: Row(
-                                children: const [
-                                  Icon(Icons.qr_code),
-                                  SizedBox(width: 5),
-                                  Text('QR'),
+                                children: [
+                                  const Icon(Icons.qr_code),
+                                  SizedBox(width: SizeConfig.screenWidth * 0.01),
+                                  Text('QR', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04)),
                                 ],
                               )),
-                          const SizedBox(width: 20),
+                          SizedBox(width: SizeConfig.screenWidth * 0.05),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: verde_oscuro,
+                              backgroundColor: verdeOscuro,
                               alignment: Alignment.center,
                             ),
                             onPressed: () {
@@ -506,10 +486,10 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
                               _scanNFC();
                             },
                             child: Row(
-                              children: const [
-                                Icon(Icons.nfc),
-                                SizedBox(width: 5),
-                                Text('NFC'),
+                              children: [
+                                const Icon(Icons.nfc),
+                                SizedBox(width: SizeConfig.screenWidth * 0.01),
+                                Text('NFC', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04)),
                               ],
                             ),
                           ),
@@ -547,7 +527,7 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
 class HOMBRE_VIVO extends StatefulWidget {
   final String titulo;
   final Color color;
-  HOMBRE_VIVO({
+  const HOMBRE_VIVO({
     Key? key,
     required this.titulo,
     required this.color,
@@ -571,22 +551,22 @@ class _HOMBRE_VIVOState extends State<HOMBRE_VIVO> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(
-              IconData(0xe187, fontFamily: 'MaterialIcons'),
+             Icon(
+              const IconData(0xe187, fontFamily: 'MaterialIcons'),
               color: blanco,
-              size: 50,
+              size: SizeConfig.screenWidth * 0.15,
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: SizeConfig.screenHeight * 0.02),
             Text(
               widget.titulo,
-              style: const TextStyle(fontSize: 20, color: blanco),
+              style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
               textAlign: TextAlign.center,
             ),
           ],
         ),
         onPressed: () {
           setState(() {
-            Navigator.of(context).pushNamed('/hombre_vivo');
+            Navigator.of(context).pushNamed('/HombreVivo');
           });
         });
   }
@@ -595,7 +575,7 @@ class _HOMBRE_VIVOState extends State<HOMBRE_VIVO> {
 class DRAWER extends StatefulWidget {
   final String usuario;
   final String rango;
-  DRAWER({Key? key, required this.usuario, required this.rango})
+  const DRAWER({Key? key, required this.usuario, required this.rango})
       : super(key: key);
 
   @override
@@ -608,54 +588,54 @@ class _DRAWERState extends State<DRAWER> {
     return Drawer(
       child: ListView(
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: SizeConfig.screenHeight * 0.04),
           Container(
-            constraints: const BoxConstraints(maxHeight: 100, maxWidth: 100),
+            constraints: BoxConstraints(maxHeight: SizeConfig.screenWidth * 0.30, maxWidth: SizeConfig.screenWidth * 0.30),
             child: Image.asset('assets/GA_logo_drawer.png'),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: SizeConfig.screenHeight * 0.04),
           Row(
             children: [
-              const SizedBox(width: 20),
+              SizedBox(width: SizeConfig.screenWidth * 0.06),
               Text(
                 widget.usuario,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16, color: negro),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: SizeConfig.screenWidth * 0.045, color: negro),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: SizeConfig.screenHeight * 0.01),
           Row(
             children: [
-              const SizedBox(width: 20),
+              SizedBox(width: SizeConfig.screenWidth * 0.06),
               Container(
-                constraints: const BoxConstraints(maxHeight: 12, maxWidth: 12),
+                constraints: BoxConstraints(maxHeight: SizeConfig.screenWidth * 0.03, maxWidth: SizeConfig.screenWidth * 0.03),
                 child: Image.asset('assets/ic_status_success.png'),
               ),
-              const SizedBox(width: 5),
+              SizedBox(width: SizeConfig.screenWidth * 0.01),
               Text(
                 widget.rango,
-                style: const TextStyle(fontSize: 16, color: negro),
+                style: TextStyle(fontSize: SizeConfig.screenWidth * 0.045, color: negro),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: SizeConfig.screenHeight * 0.01),
           Row(
-            children: const [
-              SizedBox(width: 20),
+            children: [
+              SizedBox(width: SizeConfig.screenWidth * 0.06),
               Text(
                 'Identidad validada',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16, color: negro),
+                    fontWeight: FontWeight.bold, fontSize: SizeConfig.screenWidth * 0.045, color: negro),
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: SizeConfig.screenHeight * 0.01),
           const Divider(
             color: gris,
             thickness: 1,
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: SizeConfig.screenHeight * 0.01),
           ElevatedButton(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(
@@ -666,14 +646,14 @@ class _DRAWERState extends State<DRAWER> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 ListTile(
                   title: Text(
                     'Mis Datos',
-                    style: TextStyle(fontSize: 18, color: gris),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
                   ),
                   leading:
-                      Icon(Icons.account_circle_rounded, color: gris, size: 30),
+                      Icon(Icons.account_circle_rounded, color: gris, size: SizeConfig.screenWidth * 0.085),
                 ),
               ],
             ),
@@ -693,14 +673,14 @@ class _DRAWERState extends State<DRAWER> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 ListTile(
                   title: Text(
                     'Mis Asignaciones',
-                    style: TextStyle(fontSize: 18, color: gris),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
                   ),
                   leading: Icon(Icons.hourglass_bottom_rounded,
-                      color: gris, size: 30),
+                      color: gris, size: SizeConfig.screenWidth * 0.085),
                 ),
               ],
             ),
@@ -724,13 +704,13 @@ class _DRAWERState extends State<DRAWER> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 ListTile(
                   title: Text(
                     'Acerca de esta aplicación',
-                    style: TextStyle(fontSize: 18, color: gris),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
                   ),
-                  leading: Icon(Icons.info_outline, color: gris, size: 30),
+                  leading: Icon(Icons.info_outline, color: gris, size: SizeConfig.screenWidth * 0.085),
                 ),
               ],
             ),
@@ -750,14 +730,14 @@ class _DRAWERState extends State<DRAWER> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 ListTile(
                   title: Text(
                     'Términos y condiciones',
-                    style: TextStyle(fontSize: 18, color: gris),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
                   ),
                   leading:
-                      Icon(Icons.copyright_outlined, color: gris, size: 30),
+                      Icon(Icons.copyright_outlined, color: gris, size: SizeConfig.screenWidth * 0.085),
                 ),
               ],
             ),
@@ -781,13 +761,13 @@ class _DRAWERState extends State<DRAWER> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 ListTile(
                   title: Text(
                     'Cerrar la sesión',
-                    style: TextStyle(fontSize: 18, color: gris),
+                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
                   ),
-                  leading: Icon(Icons.logout_sharp, color: gris, size: 30),
+                  leading: Icon(Icons.logout_sharp, color: gris, size: SizeConfig.screenWidth * 0.085),
                 ),
               ],
             ),
@@ -851,31 +831,49 @@ class BottomDialog {
           color: Colors.white,
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              SizedBox(height: SizeConfig.screenHeight * 0.03),
               _buildTitulo(),
-              const SizedBox(height: 8),
+              SizedBox(height: SizeConfig.screenHeight * 0.01),
               const Center(
                 child: Image(
                   image: AssetImage('assets/scan_nfc.gif'),
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: SizeConfig.screenHeight * 0.01),
               _buildDescripcion(),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: verde_oscuro,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 70, vertical: 12)),
+              SizedBox(height: SizeConfig.screenHeight * 0.03),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.screenWidth * 0.03),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                      EdgeInsets.all(SizeConfig.screenHeight * 0.023),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all(verdeOscuro),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ), //const EdgeInsets.all(20),
+                  ),
                   onPressed: () {
                     NfcManager.instance.stopSession();
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    'Cancelar',
-                    style: TextStyle(fontSize: 16),
-                  )),
+                      Navigator.of(context).pop();
+                        },
+                  child: Center(
+                    child: Text(
+                      'Cancelar',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: SizeConfig.screenWidth * 0.04,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -884,20 +882,20 @@ class BottomDialog {
   }
 
   Widget _buildTitulo() {
-    return const Text(
+    return Text(
       'Listo para escanear',
       style: TextStyle(
-        fontSize: 22,
+        fontSize: SizeConfig.screenWidth * 0.06,
         fontWeight: FontWeight.w500,
       ),
     );
   }
 
   Widget _buildDescripcion() {
-    return const Text(
+    return Text(
       'Acerque su celular al Tag NFC',
       style: TextStyle(
-        fontSize: 18,
+        fontSize: SizeConfig.screenWidth * 0.05,
       ),
     );
   }
