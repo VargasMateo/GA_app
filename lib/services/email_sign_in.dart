@@ -25,6 +25,19 @@ Future<User?> loginUsingEmailPassword(
   return user;
 }
 
+Future<void> iniciarSesionEmail(BuildContext context, TextEditingController emailController, TextEditingController passwordController) async {
+
+  await initializeFirebase();
+  User? user = await loginUsingEmailPassword(
+    email: emailController.text,
+    password: passwordController.text,
+    context: context);
+
+  if (user != null) {
+    Navigator.of(context).pushNamed('/Home');
+  }
+}
+
 
 // class initialize extends StatefulWidget {
 //   initialize({Key? key}) : super(key: key);

@@ -94,6 +94,7 @@ class _LogInState extends State<LogIn> {
                     ), //const EdgeInsets.all(20),
                   ),
                   onPressed: () {
+                    //iniciarSesionEmail(context, emailController, passwordController);
                           setState(() async {
                             await initializeFirebase();
                             User? user = await loginUsingEmailPassword(
