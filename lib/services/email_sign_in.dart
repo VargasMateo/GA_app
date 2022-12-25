@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<FirebaseApp> initializeFirebase() async {
   FirebaseApp firebaseApp = await Firebase.initializeApp();
@@ -34,10 +35,22 @@ Future<void> iniciarSesionEmail(BuildContext context, TextEditingController emai
     context: context);
 
   if (user != null) {
-    Navigator.of(context).pushNamed('/Home');
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setString('email', emailController.text);
+      prefs.setString('password', passwordController.text);
+      });
+        Navigator.of(context).pushNamed('/Home');
   }
 }
 
+void cerrarSesionEmail(BuildContext context) {
+
+  SharedPreferences.getInstance().then((prefs) {
+                  prefs.setString('email', '');
+                  prefs.setString('password', '');
+                });
+                Navigator.of(context).pushNamed('/');
+}
 
 // class initialize extends StatefulWidget {
 //   initialize({Key? key}) : super(key: key);

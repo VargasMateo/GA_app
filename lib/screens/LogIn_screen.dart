@@ -22,15 +22,7 @@ class _LogInState extends State<LogIn> {
       String? password = prefs.getString('password');
 
       if (email != null && password != null) {
-        setState(() async {
-          await initializeFirebase();
-          User? user = await loginUsingEmailPassword(
-              email: email, password: password, context: context);
-
-          if (user != null) {
-            Navigator.of(context).pushNamed('/Home');
-          }
-        });
+        iniciarSesionEmail(context, emailController, passwordController);
       }
     });
   }
@@ -94,24 +86,7 @@ class _LogInState extends State<LogIn> {
                     ), //const EdgeInsets.all(20),
                   ),
                   onPressed: () {
-                    //iniciarSesionEmail(context, emailController, passwordController);
-                          setState(() async {
-                            await initializeFirebase();
-                            User? user = await loginUsingEmailPassword(
-                                email: emailController.text,
-                                password: passwordController.text,
-                                context: context);
-
-                            if (user != null) {
-                              SharedPreferences.getInstance().then((prefs) {
-                                prefs.setString('email', emailController.text);
-                                prefs.setString(
-                                    'password', passwordController.text);
-                              });
-                              Navigator.of(context)
-                                  .pushNamed('/Home');
-                            }
-                          });
+                    iniciarSesionEmail(context, emailController, passwordController);
                         },
                   child: Center(
                     child: Text(
