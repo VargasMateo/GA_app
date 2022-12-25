@@ -32,21 +32,21 @@ class _HomeState extends State<Home> {
               crossAxisSpacing: SizeConfig.screenWidth * 0.04,
               mainAxisSpacing: SizeConfig.screenWidth * 0.04,
               children: const [
-                 ALERTA(titulo: 'ALERTA', color: verdeOscuro),
-                 DETALLES_OBJETIVO(
+                 BotonAlerta(titulo: 'ALERTA', color: verdeOscuro),
+                 BotonDetallesObjetivo(
                     titulo: 'DETALLES OBJETIVO',
                     color: amarilloOscuro,
                     redireccion: '/DetallesObjetivo'),
-                 NOVEDADES(
+                 BotonNovedades(
                     titulo: 'NOVEDADES',
                     color: verdeMedio,
                     redireccion: '/Novedades'),
-                 INICIAR_RONDA(
+                 BotonIniciarRonda(
                     titulo: 'INICIAR RONDA',
                     color: amarilloMedio,
                     redireccion: '/nfc_manager'),
-                 CHECKPOINT(titulo: 'CHECKPOINT', color: verdeClaro),
-                HOMBRE_VIVO(
+                 BotonCheckpoint(titulo: 'CHECKPOINT', color: verdeClaro),
+                BotonHombreVivo(
                   titulo: 'HOMBRE VIVO',
                   color: amarilloClaro,
                 ),
@@ -58,17 +58,17 @@ class _HomeState extends State<Home> {
   }
 }
 
-class ALERTA extends StatefulWidget {
+class BotonAlerta extends StatefulWidget {
   final String titulo;
   final Color color;
-  const ALERTA({Key? key, required this.titulo, required this.color})
+  const BotonAlerta({Key? key, required this.titulo, required this.color})
       : super(key: key);
 
   @override
-  State<ALERTA> createState() => _ALERTAState();
+  State<BotonAlerta> createState() => _BotonAlertaState();
 }
 
-class _ALERTAState extends State<ALERTA> {
+class _BotonAlertaState extends State<BotonAlerta> {
   Location location = new Location();
   bool alertaEnviada = false;
   bool _serviceEnabled = false;
@@ -217,11 +217,11 @@ class _ALERTAState extends State<ALERTA> {
   }
 }
 
-class DETALLES_OBJETIVO extends StatefulWidget {
+class BotonDetallesObjetivo extends StatefulWidget {
   final String titulo;
   final Color color;
   final String redireccion;
-  const DETALLES_OBJETIVO(
+  const BotonDetallesObjetivo(
       {Key? key,
       required this.titulo,
       required this.color,
@@ -229,10 +229,10 @@ class DETALLES_OBJETIVO extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<DETALLES_OBJETIVO> createState() => _DETALLES_OBJETIVOState();
+  State<BotonDetallesObjetivo> createState() => _BotonDetallesObjetivoState();
 }
 
-class _DETALLES_OBJETIVOState extends State<DETALLES_OBJETIVO> {
+class _BotonDetallesObjetivoState extends State<BotonDetallesObjetivo> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -268,11 +268,11 @@ class _DETALLES_OBJETIVOState extends State<DETALLES_OBJETIVO> {
   }
 }
 
-class NOVEDADES extends StatefulWidget {
+class BotonNovedades extends StatefulWidget {
   final String titulo;
   final Color color;
   final String redireccion;
-  const NOVEDADES(
+  const BotonNovedades(
       {Key? key,
       required this.titulo,
       required this.color,
@@ -280,10 +280,10 @@ class NOVEDADES extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<NOVEDADES> createState() => _NOVEDADESState();
+  State<BotonNovedades> createState() => _BotonNovedadesState();
 }
 
-class _NOVEDADESState extends State<NOVEDADES> {
+class _BotonNovedadesState extends State<BotonNovedades> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -319,11 +319,11 @@ class _NOVEDADESState extends State<NOVEDADES> {
   }
 }
 
-class INICIAR_RONDA extends StatefulWidget {
+class BotonIniciarRonda extends StatefulWidget {
   final String titulo;
   final Color color;
   final String redireccion;
-  const INICIAR_RONDA(
+  const BotonIniciarRonda(
       {Key? key,
       required this.titulo,
       required this.color,
@@ -331,10 +331,10 @@ class INICIAR_RONDA extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<INICIAR_RONDA> createState() => _INICIAR_RONDAState();
+  State<BotonIniciarRonda> createState() => _BotonIniciarRondaState();
 }
 
-class _INICIAR_RONDAState extends State<INICIAR_RONDA> {
+class _BotonIniciarRondaState extends State<BotonIniciarRonda> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -370,20 +370,20 @@ class _INICIAR_RONDAState extends State<INICIAR_RONDA> {
   }
 }
 
-class CHECKPOINT extends StatefulWidget {
+class BotonCheckpoint extends StatefulWidget {
   final String titulo;
   final Color color;
-  const CHECKPOINT({
+  const BotonCheckpoint({
     Key? key,
     required this.titulo,
     required this.color,
   }) : super(key: key);
 
   @override
-  State<CHECKPOINT> createState() => _CHECKPOINTState();
+  State<BotonCheckpoint> createState() => _BotonCheckpointState();
 }
 
-class _CHECKPOINTState extends State<CHECKPOINT> {
+class _BotonCheckpointState extends State<BotonCheckpoint> {
   ValueNotifier<dynamic> result = ValueNotifier(null);
   @override
   Widget build(BuildContext context) {
@@ -524,20 +524,20 @@ class _CHECKPOINTState extends State<CHECKPOINT> {
   }
 }
 
-class HOMBRE_VIVO extends StatefulWidget {
+class BotonHombreVivo extends StatefulWidget {
   final String titulo;
   final Color color;
-  const HOMBRE_VIVO({
+  const BotonHombreVivo({
     Key? key,
     required this.titulo,
     required this.color,
   }) : super(key: key);
 
   @override
-  State<HOMBRE_VIVO> createState() => _HOMBRE_VIVOState();
+  State<BotonHombreVivo> createState() => _BotonHombreVivoState();
 }
 
-class _HOMBRE_VIVOState extends State<HOMBRE_VIVO> {
+class _BotonHombreVivoState extends State<BotonHombreVivo> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
