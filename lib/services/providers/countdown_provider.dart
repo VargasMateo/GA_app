@@ -4,6 +4,7 @@ import 'package:green_armor_app/services/telegram.dart';
 
 import 'package:green_armor_app/services/notifications.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
 
 class CountdownProvider extends ChangeNotifier {
   Duration duration = const Duration(seconds: 1800);
@@ -11,15 +12,6 @@ class CountdownProvider extends ChangeNotifier {
   double progress = 1800;
 
   StreamSubscription<int>? _tickSubscription;
-
-  void startTimer() {
-    if (isRunning == false) {
-      _startTimer(duration.inSeconds);
-      isRunning = true;
-      postDataTexto('Se inició hombre vivo.');
-      notifyListeners();
-    }
-  }
 
   void _startTimer(int seconds) {
     _tickSubscription?.cancel();
@@ -33,8 +25,19 @@ class CountdownProvider extends ChangeNotifier {
       advertencia_1();
       advertencia_2();
       enviar_alarma();
+      postDataTexto('hombre vivo: ' + duration.toString());
       notifyListeners();
     });
+  }
+
+  void startTimer() {
+    if (isRunning == false) {
+      startBackgroundService();
+      _startTimer(duration.inSeconds);
+      isRunning = true;
+      postDataTexto('Se inició hombre vivo.');
+      notifyListeners();
+    }
   }
 
   void restartTimer() {
@@ -93,5 +96,10 @@ class CountdownProvider extends ChangeNotifier {
       postDataTexto('HOMBRE VIVO se quedó sin tiempo. Enviando alarma');
       //FALTARIA MANDAR UBICACION
     }
+  }
+
+  void startBackgroundService() {
+    final service = FlutterBackgroundService();
+    service.startService();
   }
 }
