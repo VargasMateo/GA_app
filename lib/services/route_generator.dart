@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import '../screens/login.dart';
-import '../screens/pagina_principal.dart';
-import '../screens/hombre_vivo.dart';
-import '../screens/novedades.dart';
-import '../screens/detalles_objetivo.dart';
-import '../nfc_manager.dart';
+import '../screens/LogIn_screen.dart';
+import '../screens/Home_screen.dart';
+import '../screens/HombreVivo_screen.dart';
+import '../screens/Novedades_screen.dart';
+import '../screens/DetallesObjetivo_screen.dart';
+import 'nfc_manager.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
+    //final args = settings.arguments;
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => initialize());
+        return MaterialPageRoute(builder: (_) => LogIn());
 
-      case '/pagina_principal':
-        return MaterialPageRoute(builder: (_) => pagina_principal());
+      case '/Home':
+        return MaterialPageRoute(builder: (_) => const Home());
 
-      case '/hombre_vivo':
-        return MaterialPageRoute(builder: (_) => hombre_vivo());
+      case '/HombreVivo':
+        return MaterialPageRoute(builder: (_) => const HombreVivo());
 
-      case '/novedades':
-        return MaterialPageRoute(builder: (_) => novedades());
+      case '/Novedades':
+        return MaterialPageRoute(builder: (_) => const Novedades());
 
-      case '/detalles_objetivo':
-        return MaterialPageRoute(builder: (_) => detalles_objetivo());
+      case '/DetallesObjetivo':
+        return MaterialPageRoute(builder: (_) => const DetallesObjetivo());
 
       case '/nfc_manager':
         return MaterialPageRoute(builder: (_) => nfc_manager());
