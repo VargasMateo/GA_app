@@ -809,7 +809,7 @@ class _DRAWERState extends State<DRAWER> {
               children: [
                 ListTile(
                   title: Text(
-                    'Cerrar la sesión',
+                    'Cerrar sesión',
                     style: TextStyle(
                         fontSize: SizeConfig.screenWidth * 0.045, color: gris),
                   ),
