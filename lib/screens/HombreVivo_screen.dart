@@ -23,7 +23,9 @@ class _HombreVivoState extends State<HombreVivo> {
         backgroundColor: verdeOscuro,
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: SizeConfig.screenHeight * 0.08, horizontal: SizeConfig.screenWidth * 0.04),
+        padding: EdgeInsets.symmetric(
+            vertical: SizeConfig.screenHeight * 0.08,
+            horizontal: SizeConfig.screenWidth * 0.04),
         children: [
           Stack(
             alignment: Alignment.center,
@@ -45,61 +47,63 @@ class _HombreVivoState extends State<HombreVivo> {
                 child: Text(
                   context.select((CountdownProvider countdown) =>
                       countdown.timeLeftString),
-                  style: TextStyle(fontSize: SizeConfig.screenWidth * 0.25, color: Colors.black),
+                  style: TextStyle(
+                      fontSize: SizeConfig.screenWidth * 0.25,
+                      color: Colors.black),
                 ),
               ),
             ],
           ),
           SizedBox(height: SizeConfig.screenHeight * 0.08),
           ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      EdgeInsets.all(SizeConfig.screenHeight * 0.023),
-                    ),
-                    backgroundColor:
-                        MaterialStateProperty.all(verdeOscuro),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ), //const EdgeInsets.all(20),
-                  ),
-              onPressed: () {
-                countdownProvider.startTimer();
-              },
-              child: Text(
-                      'Iniciar ronda',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.screenWidth * 0.04,
-                      ),
-                    ),),
-          SizedBox(height: SizeConfig.screenHeight * 0.01),
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                EdgeInsets.all(SizeConfig.screenHeight * 0.023),
+              ),
+              backgroundColor: MaterialStateProperty.all(verdeOscuro),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ), //const EdgeInsets.all(20),
+            ),
+            onPressed: () {
+              countdownProvider.startTimer();
+            },
+            child: Text(
+              'Iniciar ronda',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: SizeConfig.screenWidth * 0.04,
+              ),
+            ),
+          ),
+          SizedBox(height: SizeConfig.screenHeight * 0.015),
           ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      EdgeInsets.all(SizeConfig.screenHeight * 0.023),
-                    ),
-                    backgroundColor:
-                        MaterialStateProperty.all(verdeOscuro),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ), //const EdgeInsets.all(20),
-                  ),
-              onPressed: () {
-                countdownProvider.stopTimer();
-              },
-              child: Text(
-                      'Terminar ronda',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.screenWidth * 0.04,
-                      ),
-                    ),)
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                EdgeInsets.all(SizeConfig.screenHeight * 0.023),
+              ),
+              backgroundColor: MaterialStateProperty.all(verdeOscuro),
+              shape: MaterialStateProperty.all(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+              ), //const EdgeInsets.all(20),
+            ),
+            onPressed: () {
+              countdownProvider.stopTimer();
+            },
+            child: Text(
+              'Terminar ronda',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: SizeConfig.screenWidth * 0.04,
+              ),
+            ),
+          )
         ],
       ),
     );

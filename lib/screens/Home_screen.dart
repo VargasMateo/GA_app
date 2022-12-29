@@ -8,7 +8,6 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../services/responsive.dart';
 import '../services/widgets.dart';
 
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
   @override
@@ -27,25 +26,27 @@ class _HomeState extends State<Home> {
         ),
         body: SafeArea(
           child: GridView.count(
-              padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.04, vertical: SizeConfig.screenWidth * 0.04),
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeConfig.screenWidth * 0.04,
+                  vertical: SizeConfig.screenWidth * 0.04),
               crossAxisCount: 2,
               crossAxisSpacing: SizeConfig.screenWidth * 0.04,
               mainAxisSpacing: SizeConfig.screenWidth * 0.04,
               children: const [
-                 BotonAlerta(titulo: 'ALERTA', color: verdeOscuro),
-                 BotonDetallesObjetivo(
+                BotonAlerta(titulo: 'ALERTA', color: verdeOscuro),
+                BotonDetallesObjetivo(
                     titulo: 'DETALLES OBJETIVO',
                     color: amarilloOscuro,
                     redireccion: '/DetallesObjetivo'),
-                 BotonNovedades(
+                BotonNovedades(
                     titulo: 'NOVEDADES',
                     color: verdeMedio,
                     redireccion: '/Novedades'),
-                 BotonIniciarRonda(
+                BotonIniciarRonda(
                     titulo: 'INICIAR RONDA',
                     color: amarilloMedio,
                     redireccion: '/nfc_manager'),
-                 BotonCheckpoint(titulo: 'CHECKPOINT', color: verdeClaro),
+                BotonCheckpoint(titulo: 'CHECKPOINT', color: verdeClaro),
                 BotonHombreVivo(
                   titulo: 'HOMBRE VIVO',
                   color: amarilloClaro,
@@ -95,7 +96,8 @@ class _BotonAlertaState extends State<BotonAlerta> {
           SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+            style: TextStyle(
+                fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -106,11 +108,12 @@ class _BotonAlertaState extends State<BotonAlerta> {
           builder: (context) => AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(18.0))),
-            icon: Icon(Icons.warning_amber_outlined, size: SizeConfig.screenWidth * 0.18),
+            icon: Icon(Icons.warning_amber_outlined,
+                size: SizeConfig.screenWidth * 0.18),
             title: Text(
-              '¿Está seguro que desea enviar una alerta?', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
+              '¿Está seguro que desea enviar una alerta?',
+              style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
               textAlign: TextAlign.center,
-              
             ),
             elevation: 2,
             actions: [
@@ -125,7 +128,11 @@ class _BotonAlertaState extends State<BotonAlerta> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text('Cancelar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04),)),
+                      child: Text(
+                        'Cancelar',
+                        style:
+                            TextStyle(fontSize: SizeConfig.screenWidth * 0.04),
+                      )),
                   SizedBox(width: SizeConfig.screenWidth * 0.05),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -138,7 +145,9 @@ class _BotonAlertaState extends State<BotonAlerta> {
                         alertaEnviada = true;
                         Navigator.of(context).pop();
                       },
-                      child: Text('Aceptar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))),
+                      child: Text('Aceptar',
+                          style: TextStyle(
+                              fontSize: SizeConfig.screenWidth * 0.04))),
                 ],
               ),
             ],
@@ -152,9 +161,11 @@ class _BotonAlertaState extends State<BotonAlerta> {
             builder: (context) => AlertDialog(
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(18.0))),
-              icon: Icon(Icons.cancel_outlined, size: SizeConfig.screenWidth * 0.18),
+              icon: Icon(Icons.cancel_outlined,
+                  size: SizeConfig.screenWidth * 0.18),
               title: Text(
-                '¿Desea cancelar la Alerta enviada?', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
+                '¿Desea cancelar la Alerta enviada?',
+                style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
                 textAlign: TextAlign.center,
               ),
               elevation: 2,
@@ -170,7 +181,9 @@ class _BotonAlertaState extends State<BotonAlerta> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Cancelar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))),
+                        child: Text('Cancelar',
+                            style: TextStyle(
+                                fontSize: SizeConfig.screenWidth * 0.04))),
                     SizedBox(width: SizeConfig.screenWidth * 0.05),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -184,7 +197,9 @@ class _BotonAlertaState extends State<BotonAlerta> {
                           //cancelarAlerta();
                           Navigator.of(context).pop();
                         },
-                        child: Text('Aceptar', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))),
+                        child: Text('Aceptar',
+                            style: TextStyle(
+                                fontSize: SizeConfig.screenWidth * 0.04))),
                   ],
                 ),
               ],
@@ -246,7 +261,7 @@ class _BotonDetallesObjetivoState extends State<BotonDetallesObjetivo> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           Icon(
+          Icon(
             const IconData(0xe0a5, fontFamily: 'MaterialIcons'),
             color: blanco,
             size: SizeConfig.screenWidth * 0.15,
@@ -254,7 +269,8 @@ class _BotonDetallesObjetivoState extends State<BotonDetallesObjetivo> {
           SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+            style: TextStyle(
+                fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -297,7 +313,7 @@ class _BotonNovedadesState extends State<BotonNovedades> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           Icon(
+          Icon(
             const IconData(0xf614, fontFamily: 'MaterialIcons'),
             color: blanco,
             size: SizeConfig.screenWidth * 0.15,
@@ -305,7 +321,8 @@ class _BotonNovedadesState extends State<BotonNovedades> {
           SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+            style: TextStyle(
+                fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -348,7 +365,7 @@ class _BotonIniciarRondaState extends State<BotonIniciarRonda> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-           Icon(
+          Icon(
             const IconData(0xf04c5, fontFamily: 'MaterialIcons'),
             color: blanco,
             size: SizeConfig.screenWidth * 0.15,
@@ -356,7 +373,8 @@ class _BotonIniciarRondaState extends State<BotonIniciarRonda> {
           SizedBox(height: SizeConfig.screenHeight * 0.02),
           Text(
             widget.titulo,
-            style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+            style: TextStyle(
+                fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
             textAlign: TextAlign.center,
           ),
         ],
@@ -402,7 +420,7 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   Icon(
+                  Icon(
                     const IconData(0xe7ab, fontFamily: 'MaterialIcons'),
                     color: blanco,
                     size: SizeConfig.screenWidth * 0.15,
@@ -410,7 +428,9 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                   SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Text(
                     widget.titulo,
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.055,
+                        color: blanco),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -431,7 +451,7 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                   Icon(
+                  Icon(
                     const IconData(0xe7ab, fontFamily: 'MaterialIcons'),
                     color: blanco,
                     size: SizeConfig.screenWidth * 0.15,
@@ -439,7 +459,9 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                   SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Text(
                     widget.titulo,
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.055,
+                        color: blanco),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -452,7 +474,8 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                         borderRadius: BorderRadius.all(Radius.circular(18.0))),
                     backgroundColor: Colors.white,
                     title: Text(
-                      '¿Qué desea escanear?', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
+                      '¿Qué desea escanear?',
+                      style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05),
                       textAlign: TextAlign.center,
                     ),
                     elevation: 2,
@@ -471,8 +494,12 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                               child: Row(
                                 children: [
                                   const Icon(Icons.qr_code),
-                                  SizedBox(width: SizeConfig.screenWidth * 0.01),
-                                  Text('QR', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04)),
+                                  SizedBox(
+                                      width: SizeConfig.screenWidth * 0.01),
+                                  Text('QR',
+                                      style: TextStyle(
+                                          fontSize:
+                                              SizeConfig.screenWidth * 0.04)),
                                 ],
                               )),
                           SizedBox(width: SizeConfig.screenWidth * 0.05),
@@ -489,7 +516,10 @@ class _BotonCheckpointState extends State<BotonCheckpoint> {
                               children: [
                                 const Icon(Icons.nfc),
                                 SizedBox(width: SizeConfig.screenWidth * 0.01),
-                                Text('NFC', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04)),
+                                Text('NFC',
+                                    style: TextStyle(
+                                        fontSize:
+                                            SizeConfig.screenWidth * 0.04)),
                               ],
                             ),
                           ),
@@ -551,7 +581,7 @@ class _BotonHombreVivoState extends State<BotonHombreVivo> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             Icon(
+            Icon(
               const IconData(0xe187, fontFamily: 'MaterialIcons'),
               color: blanco,
               size: SizeConfig.screenWidth * 0.15,
@@ -559,7 +589,8 @@ class _BotonHombreVivoState extends State<BotonHombreVivo> {
             SizedBox(height: SizeConfig.screenHeight * 0.02),
             Text(
               widget.titulo,
-              style: TextStyle(fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
+              style: TextStyle(
+                  fontSize: SizeConfig.screenWidth * 0.055, color: blanco),
               textAlign: TextAlign.center,
             ),
           ],
@@ -590,7 +621,9 @@ class _DRAWERState extends State<DRAWER> {
         children: [
           SizedBox(height: SizeConfig.screenHeight * 0.04),
           Container(
-            constraints: BoxConstraints(maxHeight: SizeConfig.screenWidth * 0.30, maxWidth: SizeConfig.screenWidth * 0.30),
+            constraints: BoxConstraints(
+                maxHeight: SizeConfig.screenWidth * 0.30,
+                maxWidth: SizeConfig.screenWidth * 0.30),
             child: Image.asset('assets/GA_logo_drawer.png'),
           ),
           SizedBox(height: SizeConfig.screenHeight * 0.04),
@@ -600,7 +633,9 @@ class _DRAWERState extends State<DRAWER> {
               Text(
                 widget.usuario,
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: SizeConfig.screenWidth * 0.045, color: negro),
+                    fontWeight: FontWeight.bold,
+                    fontSize: SizeConfig.screenWidth * 0.045,
+                    color: negro),
               ),
             ],
           ),
@@ -609,13 +644,16 @@ class _DRAWERState extends State<DRAWER> {
             children: [
               SizedBox(width: SizeConfig.screenWidth * 0.06),
               Container(
-                constraints: BoxConstraints(maxHeight: SizeConfig.screenWidth * 0.03, maxWidth: SizeConfig.screenWidth * 0.03),
+                constraints: BoxConstraints(
+                    maxHeight: SizeConfig.screenWidth * 0.03,
+                    maxWidth: SizeConfig.screenWidth * 0.03),
                 child: Image.asset('assets/ic_status_success.png'),
               ),
               SizedBox(width: SizeConfig.screenWidth * 0.01),
               Text(
                 widget.rango,
-                style: TextStyle(fontSize: SizeConfig.screenWidth * 0.045, color: negro),
+                style: TextStyle(
+                    fontSize: SizeConfig.screenWidth * 0.045, color: negro),
               ),
             ],
           ),
@@ -626,7 +664,9 @@ class _DRAWERState extends State<DRAWER> {
               Text(
                 'Identidad validada',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: SizeConfig.screenWidth * 0.045, color: negro),
+                    fontWeight: FontWeight.bold,
+                    fontSize: SizeConfig.screenWidth * 0.045,
+                    color: negro),
               ),
             ],
           ),
@@ -650,10 +690,11 @@ class _DRAWERState extends State<DRAWER> {
                 ListTile(
                   title: Text(
                     'Mis Datos',
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.045, color: gris),
                   ),
-                  leading:
-                      Icon(Icons.account_circle_rounded, color: gris, size: SizeConfig.screenWidth * 0.085),
+                  leading: Icon(Icons.account_circle_rounded,
+                      color: gris, size: SizeConfig.screenWidth * 0.08),
                 ),
               ],
             ),
@@ -677,10 +718,11 @@ class _DRAWERState extends State<DRAWER> {
                 ListTile(
                   title: Text(
                     'Mis Asignaciones',
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.045, color: gris),
                   ),
                   leading: Icon(Icons.hourglass_bottom_rounded,
-                      color: gris, size: SizeConfig.screenWidth * 0.085),
+                      color: gris, size: SizeConfig.screenWidth * 0.08),
                 ),
               ],
             ),
@@ -708,9 +750,11 @@ class _DRAWERState extends State<DRAWER> {
                 ListTile(
                   title: Text(
                     'Acerca de esta aplicación',
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.045, color: gris),
                   ),
-                  leading: Icon(Icons.info_outline, color: gris, size: SizeConfig.screenWidth * 0.085),
+                  leading: Icon(Icons.info_outline,
+                      color: gris, size: SizeConfig.screenWidth * 0.08),
                 ),
               ],
             ),
@@ -734,10 +778,11 @@ class _DRAWERState extends State<DRAWER> {
                 ListTile(
                   title: Text(
                     'Términos y condiciones',
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.045, color: gris),
                   ),
-                  leading:
-                      Icon(Icons.copyright_outlined, color: gris, size: SizeConfig.screenWidth * 0.085),
+                  leading: Icon(Icons.copyright_outlined,
+                      color: gris, size: SizeConfig.screenWidth * 0.08),
                 ),
               ],
             ),
@@ -765,9 +810,11 @@ class _DRAWERState extends State<DRAWER> {
                 ListTile(
                   title: Text(
                     'Cerrar la sesión',
-                    style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05, color: gris),
+                    style: TextStyle(
+                        fontSize: SizeConfig.screenWidth * 0.045, color: gris),
                   ),
-                  leading: Icon(Icons.logout_sharp, color: gris, size: SizeConfig.screenWidth * 0.085),
+                  leading: Icon(Icons.logout_sharp,
+                      color: gris, size: SizeConfig.screenWidth * 0.08),
                 ),
               ],
             ),
@@ -846,8 +893,7 @@ class BottomDialog {
                     padding: MaterialStateProperty.all(
                       EdgeInsets.all(SizeConfig.screenHeight * 0.023),
                     ),
-                    backgroundColor:
-                        MaterialStateProperty.all(verdeOscuro),
+                    backgroundColor: MaterialStateProperty.all(verdeOscuro),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
@@ -856,8 +902,8 @@ class BottomDialog {
                   ),
                   onPressed: () {
                     NfcManager.instance.stopSession();
-                      Navigator.of(context).pop();
-                        },
+                    Navigator.of(context).pop();
+                  },
                   child: Center(
                     child: Text(
                       'Cancelar',
