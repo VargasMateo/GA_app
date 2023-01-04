@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:green_armor_app/services/email_sign_in.dart';
 import '../screens/LogIn_screen.dart';
 import '../screens/Home_screen.dart';
 import '../screens/HombreVivo_screen.dart';
@@ -11,8 +12,11 @@ class RouteGenerator {
     //final args = settings.arguments;
 
     switch (settings.name) {
+      case '/SignedInOut':
+        return MaterialPageRoute(builder: (_) => const SignedInOut());
+
       case '/':
-        return MaterialPageRoute(builder: (_) => LogIn());
+        return MaterialPageRoute(builder: (_) => const LogIn());
 
       case '/Home':
         return MaterialPageRoute(builder: (_) => const Home());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:green_armor_app/services/telegram.dart';
 import 'responsive.dart';
+
+// COLORES
 
 const verdeOscuro = Color(0xFF013c21);
 const verdeMedio = Color.fromARGB(255, 13, 124, 54);
@@ -13,7 +14,17 @@ const negro = Color(0xFF101010);
 const gris = Color(0xFF767676);
 const rojo = Color(0xFFe83845);
 
-//LOGIN_SCREEN
+// ERRORES
+
+final RegExp emailValidatorRegExp =
+    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+const String kEmailNullError = "Por favor, ingresa tu Email";
+const String kInvalidEmailError = "Por favor, ingresa un Email válido";
+const String kPassNullError = "Por favor, ingresa tu contraseña";
+const String kShortPassError = "La contraseña es demasiado corta";
+const String kWrongEmailPassword = "El Email y/o la contraseña son incorrectos";
+
+// LOGIN_SCREEN
 
 Widget textFiled(
     String texto, TextEditingController controller, bool oscurecer) {
@@ -47,53 +58,24 @@ Widget textFiled(
 
 Widget appBarPersonalizado(String texto1, String texto2) {
   return Row(
-            children: [
-              Container(
-                constraints: BoxConstraints(maxHeight: SizeConfig.screenHeight * 0.08, maxWidth: SizeConfig.screenWidth * 0.08),
-                child: Image.asset('assets/GA_dorado.png'),
-              ),
-              SizedBox(width: SizeConfig.screenWidth * 0.02),
-              Text(texto1,
-                  style: TextStyle(color: blanco, fontWeight: FontWeight.bold, fontSize: SizeConfig.screenWidth * 0.055)),
-              Text(texto2,
-                  style: TextStyle(
-                      color: amarilloOscuro, fontWeight: FontWeight.bold, fontSize: SizeConfig.screenWidth * 0.055)),
-            ],
-          );
-}
-
-Widget boton(BuildContext context) {
-  return Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.screenWidth * 0.03),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      EdgeInsets.all(SizeConfig.screenHeight * 0.023),
-                    ),
-                    backgroundColor:
-                        MaterialStateProperty.all(verdeOscuro),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                    ), //const EdgeInsets.all(20),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                                  .pushNamed('/Home');
-                                  postDataTexto('prueba');
-                        },
-                  child: Center(
-                    child: Text(
-                      'Prueba',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.screenWidth * 0.04,
-                      ),
-                    ),
-                  ),
-                ),
-              );
+    children: [
+      Container(
+        constraints: BoxConstraints(
+            maxHeight: SizeConfig.screenHeight * 0.08,
+            maxWidth: SizeConfig.screenWidth * 0.08),
+        child: Image.asset('assets/GA_dorado.png'),
+      ),
+      SizedBox(width: SizeConfig.screenWidth * 0.02),
+      Text(texto1,
+          style: TextStyle(
+              color: blanco,
+              fontWeight: FontWeight.bold,
+              fontSize: SizeConfig.screenWidth * 0.055)),
+      Text(texto2,
+          style: TextStyle(
+              color: amarilloOscuro,
+              fontWeight: FontWeight.bold,
+              fontSize: SizeConfig.screenWidth * 0.055)),
+    ],
+  );
 }

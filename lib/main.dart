@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:green_armor_app/services/route_generator.dart';
 import 'services/notifications.dart';
@@ -8,10 +9,13 @@ import 'package:green_armor_app/services/providers/countdown_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initNotifications();
-  runApp(AppGreenArmor());
+  await Firebase.initializeApp();
+  runApp(const AppGreenArmor());
 }
 
 class AppGreenArmor extends StatelessWidget {
+  const AppGreenArmor({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -25,7 +29,7 @@ class AppGreenArmor extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        initialRoute: '/',
+        initialRoute: '/SignedInOut',
         onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );

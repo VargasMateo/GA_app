@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:green_armor_app/services/email_sign_in.dart';
 import 'package:green_armor_app/services/responsive.dart';
 import '../services/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -12,19 +12,8 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  @override
-  void initState() {
-    super.initState();
-    SharedPreferences.getInstance().then((prefs) {
-      String? email = prefs.getString('email');
-      String? password = prefs.getString('password');
-
-      if (email != null && password != null) {
-        iniciarSesionEmail(context, emailController, passwordController);
-      }
-    });
-  }
-
+  final List<String?> errors = [];
+  bool logged = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -50,13 +39,15 @@ class _LogInState extends State<LogIn> {
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.08),
                   Text(
-                    'Sign in',
+                    'Log in',
                     style: TextStyle(fontSize: SizeConfig.screenWidth * 0.06),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.015),
                   textFiled('Email', emailController, false),
                   SizedBox(height: SizeConfig.screenHeight * 0.015),
                   textFiled('Contraseña', passwordController, true),
+                  SizedBox(height: SizeConfig.screenHeight * 0.01),
+                  FormError(errors: errors),
                   TextButton(
                     style: ButtonStyle(
                         foregroundColor:
@@ -84,8 +75,14 @@ class _LogInState extends State<LogIn> {
                         ), //const EdgeInsets.all(20),
                       ),
                       onPressed: () {
-                        iniciarSesionEmail(
-                            context, emailController, passwordController);
+                        setState(() {
+                          loginUsingEmailPassword(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              logged: logged);
+                          validadorErrores(errors, emailController.text,
+                              passwordController.text, logged);
+                        });
                       },
                       child: Center(
                         child: Text(
@@ -107,4 +104,92 @@ class _LogInState extends State<LogIn> {
       ),
     );
   }
+}
+
+class FormError extends StatelessWidget {
+  List<String?> errors;
+  FormError({
+    Key? key,
+    required this.errors,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(
+        errors.length,
+        (index) => formErrorText(
+          error: errors[index],
+        ),
+      ),
+    );
+  }
+
+  Padding formErrorText({String? error}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.03),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            "assets/Error.svg",
+            height: SizeConfig.screenHeight * 0.015,
+            width: SizeConfig.screenWidth * 0.015,
+          ),
+          SizedBox(
+            width: SizeConfig.screenWidth * 0.01,
+          ),
+          Text(error!),
+        ],
+      ),
+    );
+  }
+}
+
+List<String?> validadorErrores(
+    List<String?> errors, String email, String password, bool logged) {
+  if (email == '') {
+    if (!errors.contains(kEmailNullError)) {
+      errors.add(kEmailNullError);
+    }
+  } else {
+    errors.remove(kEmailNullError);
+    if (!emailValidatorRegExp.hasMatch(email)) {
+      if (!errors.contains(kInvalidEmailError)) {
+        errors.add(kInvalidEmailError);
+      }
+    } else {
+      errors.remove(kInvalidEmailError);
+    }
+  }
+
+  if (password == '') {
+    if (!errors.contains(kPassNullError)) {
+      errors.add(kPassNullError);
+    }
+  } else {
+    errors.remove(kPassNullError);
+    if (password.length < 6) {
+      if (!errors.contains(kShortPassError)) {
+        errors.add(kShortPassError);
+      }
+    } else {
+      errors.remove(kShortPassError);
+    }
+  }
+
+  if (logged != true) {
+    if (!errors.contains(kWrongEmailPassword)) {
+      if (!errors.contains(kEmailNullError) &&
+          (!errors.contains(kInvalidEmailError))) {
+        if (!errors.contains(kPassNullError) &&
+            (!errors.contains(kShortPassError))) {
+          errors.add(kWrongEmailPassword);
+        }
+      }
+    }
+  } else {
+    errors.remove(kWrongEmailPassword);
+  }
+
+  return errors;
 }

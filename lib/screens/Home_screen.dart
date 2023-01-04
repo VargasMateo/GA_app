@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_armor_app/services/email_sign_in.dart';
 import 'package:green_armor_app/services/telegram.dart';
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
                 ),
               ]),
         ),
-        drawer: const DRAWER(usuario: 'Osvaldo Leites', rango: 'Empleado'),
+        drawer: const DRAWER(rango: 'Empleado'),
       ),
     );
   }
@@ -70,7 +71,7 @@ class BotonAlerta extends StatefulWidget {
 }
 
 class _BotonAlertaState extends State<BotonAlerta> {
-  Location location = new Location();
+  Location location = Location();
   bool alertaEnviada = false;
   bool _serviceEnabled = false;
   PermissionStatus _permissionGranted = PermissionStatus.granted;
@@ -604,16 +605,16 @@ class _BotonHombreVivoState extends State<BotonHombreVivo> {
 }
 
 class DRAWER extends StatefulWidget {
-  final String usuario;
   final String rango;
-  const DRAWER({Key? key, required this.usuario, required this.rango})
-      : super(key: key);
+  const DRAWER({Key? key, required this.rango}) : super(key: key);
 
   @override
   State<DRAWER> createState() => _DRAWERState();
 }
 
 class _DRAWERState extends State<DRAWER> {
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -631,7 +632,7 @@ class _DRAWERState extends State<DRAWER> {
             children: [
               SizedBox(width: SizeConfig.screenWidth * 0.06),
               Text(
-                widget.usuario,
+                user.email!,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: SizeConfig.screenWidth * 0.045,
@@ -820,7 +821,7 @@ class _DRAWERState extends State<DRAWER> {
             ),
             onPressed: () {
               setState(() {
-                cerrarSesionEmail(context);
+                logoutUsingEmailPassword(context);
               });
             },
           ),
