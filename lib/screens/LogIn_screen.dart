@@ -125,7 +125,7 @@ class FormError extends StatelessWidget {
 
   Padding formErrorText({String? error}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.03),
+      padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.04),
       child: Row(
         children: [
           SvgPicture.asset(
