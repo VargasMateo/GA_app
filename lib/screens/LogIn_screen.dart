@@ -13,7 +13,6 @@ class LogIn extends StatefulWidget {
 
 class _LogInState extends State<LogIn> {
   final List<String?> errors = [];
-  bool logged = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -74,12 +73,11 @@ class _LogInState extends State<LogIn> {
                           ),
                         ), //const EdgeInsets.all(20),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
+                        bool logged = await loginUsingEmailPassword(
+                            email: emailController.text,
+                            password: passwordController.text);
                         setState(() {
-                          loginUsingEmailPassword(
-                              email: emailController.text,
-                              password: passwordController.text,
-                              logged: logged);
                           validadorErrores(errors, emailController.text,
                               passwordController.text, logged);
                         });
@@ -131,7 +129,7 @@ class FormError extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            "assets/Error.svg",
+            "assets/svg/Error.svg",
             height: SizeConfig.screenHeight * 0.015,
             width: SizeConfig.screenWidth * 0.015,
           ),
@@ -177,7 +175,7 @@ List<String?> validadorErrores(
     }
   }
 
-  if (logged != true) {
+  if (logged == false) {
     if (!errors.contains(kWrongEmailPassword)) {
       if (!errors.contains(kEmailNullError) &&
           (!errors.contains(kInvalidEmailError))) {

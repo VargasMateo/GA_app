@@ -29,11 +29,11 @@ Future<FirebaseApp> initializeFirebase() async {
   return firebaseApp;
 }
 
-Future<void> loginUsingEmailPassword({
+Future<bool> loginUsingEmailPassword({
   required String email,
   required String password,
-  required bool logged,
 }) async {
+  bool logged = false;
   await initializeFirebase();
   FirebaseAuth auth = FirebaseAuth.instance;
   try {
@@ -47,6 +47,7 @@ Future<void> loginUsingEmailPassword({
       print('not user found for the email');
     }
   }
+  return logged;
 }
 
 void logoutUsingEmailPassword(BuildContext context) {
