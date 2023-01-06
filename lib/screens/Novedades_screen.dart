@@ -5,8 +5,6 @@ import 'package:green_armor_app/services/telegram.dart';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:async';
-import 'dart:io';
 
 class Novedades extends StatefulWidget {
   const Novedades({Key? key}) : super(key: key);
@@ -70,7 +68,9 @@ class _NovedadesState extends State<Novedades> {
       body: ListView(
         children: [
           Card(
-            margin: EdgeInsets.symmetric(vertical: SizeConfig.screenHeight * 0.01, horizontal: SizeConfig.screenWidth * 0.03),
+            margin: EdgeInsets.symmetric(
+                vertical: SizeConfig.screenHeight * 0.01,
+                horizontal: SizeConfig.screenWidth * 0.03),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -89,40 +89,44 @@ class _NovedadesState extends State<Novedades> {
                   children: [
                     SizedBox(width: SizeConfig.screenWidth * 0.025),
                     Text('Escriba su mensaje a continuación',
-                        style: TextStyle(fontSize: SizeConfig.screenWidth * 0.05)),
+                        style:
+                            TextStyle(fontSize: SizeConfig.screenWidth * 0.05)),
                   ],
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.02),
                 Padding(
-    padding: EdgeInsets.symmetric(horizontal: SizeConfig.screenWidth * 0.03),
-    child: Container(
-      decoration: BoxDecoration(
-          color: Colors.grey[200],
-          border: Border.all(color: verdeOscuro),
-          borderRadius: BorderRadius.circular(18)),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: SizeConfig.screenWidth * 0.05,
-        ),
-        child: TextField(
-          controller: mensajeController,
-          cursorColor: verdeOscuro,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Escriba aquí...',
-          ),
-          style: TextStyle(fontSize: SizeConfig.screenWidth * 0.041),
-          minLines: 1,
-                    maxLines: 100,
-        ),
-      ),
-    ),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.screenWidth * 0.03),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        border: Border.all(color: verdeOscuro),
+                        borderRadius: BorderRadius.circular(18)),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: SizeConfig.screenWidth * 0.05,
+                      ),
+                      child: TextField(
+                        controller: mensajeController,
+                        cursorColor: verdeOscuro,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Escriba aquí...',
+                        ),
+                        style:
+                            TextStyle(fontSize: SizeConfig.screenWidth * 0.041),
+                        minLines: 1,
+                        maxLines: 100,
+                      ),
+                    ),
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
+                      padding:
+                          EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
                       child: FloatingActionButton(
                         backgroundColor: verdeOscuro,
                         onPressed: () {
@@ -130,12 +134,14 @@ class _NovedadesState extends State<Novedades> {
                         },
                         heroTag: 'image1',
                         tooltip: 'Pick Multiple Image from gallery',
-                        child: Icon(Icons.photo_library, size: SizeConfig.screenWidth * 0.07),
+                        child: Icon(Icons.photo_library,
+                            size: SizeConfig.screenWidth * 0.07),
                       ),
                     ),
-                     SizedBox(width: SizeConfig.screenWidth * 0.02),
+                    SizedBox(width: SizeConfig.screenWidth * 0.02),
                     Padding(
-                      padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
+                      padding:
+                          EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
                       child: FloatingActionButton(
                         backgroundColor: verdeMedio,
                         onPressed: () {
@@ -143,12 +149,14 @@ class _NovedadesState extends State<Novedades> {
                         },
                         heroTag: 'image2',
                         tooltip: 'Take a Photo',
-                        child: Icon(Icons.camera_alt, size: SizeConfig.screenWidth * 0.07),
+                        child: Icon(Icons.camera_alt,
+                            size: SizeConfig.screenWidth * 0.07),
                       ),
                     ),
-                     SizedBox(width: SizeConfig.screenWidth * 0.025),
+                    SizedBox(width: SizeConfig.screenWidth * 0.025),
                     Padding(
-                      padding:  EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
+                      padding:
+                          EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
                       child: FloatingActionButton(
                         backgroundColor: amarilloOscuro,
                         onPressed: () {
@@ -156,12 +164,14 @@ class _NovedadesState extends State<Novedades> {
                         },
                         heroTag: 'video0',
                         tooltip: 'Pick Video from gallery',
-                        child: Icon(Icons.video_library, size: SizeConfig.screenWidth * 0.07),
+                        child: Icon(Icons.video_library,
+                            size: SizeConfig.screenWidth * 0.07),
                       ),
                     ),
                     SizedBox(width: SizeConfig.screenWidth * 0.025),
                     Padding(
-                      padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
+                      padding:
+                          EdgeInsets.only(top: SizeConfig.screenHeight * 0.03),
                       child: FloatingActionButton(
                         backgroundColor: amarilloMedio,
                         onPressed: () {
@@ -169,7 +179,8 @@ class _NovedadesState extends State<Novedades> {
                         },
                         heroTag: 'video1',
                         tooltip: 'Take a Video',
-                        child: Icon(Icons.videocam, size: SizeConfig.screenWidth * 0.07),
+                        child: Icon(Icons.videocam,
+                            size: SizeConfig.screenWidth * 0.07),
                       ),
                     ),
                   ],
@@ -177,29 +188,32 @@ class _NovedadesState extends State<Novedades> {
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Center(
                   child: listado.isEmpty
-                      ? Text('Seleccione o tome un archivo multimedia', style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04))
-                      : Text('Archivos seleccionados ' +
-                          listado.length.toString(), style: TextStyle(fontSize: SizeConfig.screenWidth * 0.04)),
+                      ? Text('Seleccione o tome un archivo multimedia',
+                          style: TextStyle(
+                              fontSize: SizeConfig.screenWidth * 0.04))
+                      : Text(
+                          'Archivos seleccionados ' + listado.length.toString(),
+                          style: TextStyle(
+                              fontSize: SizeConfig.screenWidth * 0.04)),
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.02),
                 Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.screenWidth * 0.03),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      EdgeInsets.all(SizeConfig.screenHeight * 0.023),
-                    ),
-                    backgroundColor:
-                        MaterialStateProperty.all(verdeOscuro),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.screenWidth * 0.03),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                        EdgeInsets.all(SizeConfig.screenHeight * 0.023),
                       ),
-                    ), //const EdgeInsets.all(20),
-                  ),
-                  onPressed: () {
-                    setState(() {
+                      backgroundColor: MaterialStateProperty.all(verdeOscuro),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ), //const EdgeInsets.all(20),
+                    ),
+                    onPressed: () {
+                      setState(() {
                         //print(mensajeController.text);
                         //print(listado[0]!.path);
                         postDataTexto(mensajeController.text);
@@ -207,19 +221,19 @@ class _NovedadesState extends State<Novedades> {
                         postDataImagen(listado[0]);
                         print('2');
                       });
-                        },
-                  child: Center(
-                    child: Text(
-                      'Enviar novedad',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: SizeConfig.screenWidth * 0.04,
+                    },
+                    child: Center(
+                      child: Text(
+                        'Enviar novedad',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: SizeConfig.screenWidth * 0.04,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
                 SizedBox(height: SizeConfig.screenHeight * 0.025),
               ],
             ),
