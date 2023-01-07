@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:green_armor_app/services/email_sign_in.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:green_armor_app/services/email_sign_in.dart';
 
 class nfc_manager extends StatefulWidget {
   @override
@@ -19,7 +21,7 @@ class nfc_managerState extends State<nfc_manager> {
         body: SafeArea(
           child: FutureBuilder<bool>(
             future: NfcManager.instance.isAvailable(),
-            builder: (context, ss) => ss.data != true
+            builder: (context, ss) => ss.data == true
                 ? Center(child: Text('NfcManager.isAvailable(): ${ss.data}'))
                 : Flex(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,6 +60,14 @@ class nfc_managerState extends State<nfc_manager> {
                             ElevatedButton(
                                 child: const Text('Ndef Write Lock'),
                                 onPressed: _ndefWriteLock),
+                            ElevatedButton(
+                                child: const Text('Crear usuario Firebase'),
+                                onPressed: () async {
+                                  bool usuarioCreado = await createAccount(
+                                      email: 'email@gmail.com',
+                                      password: 'password');
+                                  print(usuarioCreado);
+                                }),
                           ],
                         ),
                       ),

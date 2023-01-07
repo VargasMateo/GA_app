@@ -53,3 +53,36 @@ Future<bool> loginUsingEmailPassword({
 void logoutUsingEmailPassword(BuildContext context) {
   FirebaseAuth.instance.signOut();
 }
+
+Future<bool> createAccount({
+  required String email,
+  required String password,
+}) async {
+  bool created = false;
+  await initializeFirebase();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  try {
+    UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+        email: email, password: password);
+    User? user = userCredential.user;
+    updateAccount(user);
+    created = true;
+  } on FirebaseAuthException catch (e) {
+    if (e.code == "user-not-found") {
+      created = false;
+      print('creating a new user was not possible');
+    }
+  }
+  return created;
+}
+
+Future<void> updateAccount(User? user) async {
+  String? email = user!.email;
+  if (email != null) {
+    int index = email.indexOf('@');
+    String displayName = email!.substring(0, index);
+    await user.updateDisplayName(displayName);
+  }
+  await user.updatePhotoURL(
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
+}

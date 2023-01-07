@@ -1,6 +1,7 @@
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void postDataImagen(XFile? fotos) async {
   const url =
@@ -18,9 +19,11 @@ void postDataImagen(XFile? fotos) async {
 }
 
 void postDataTexto(String mensaje) async {
+  User user = FirebaseAuth.instance.currentUser!;
+  String? email = user.email;
   const url =
       "https://api.telegram.org/bot5791230611:AAEYNu-jlJn2QdkHvO_uq3bXK-qucN8M9rE/sendMessage";
-
+  mensaje = '$email $mensaje';
   try {
     final response = await post(Uri.parse(url),
         body: {"chat_id": "1760637860", "text": mensaje});

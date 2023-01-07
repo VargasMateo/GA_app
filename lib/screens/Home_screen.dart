@@ -1,13 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:green_armor_app/services/email_sign_in.dart';
 import 'package:green_armor_app/services/telegram.dart';
+import '../services/responsive.dart';
+import '../services/widgets.dart';
 
 import 'package:location/location.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import '../services/responsive.dart';
-import '../services/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

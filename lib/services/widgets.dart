@@ -18,9 +18,9 @@ const rojo = Color(0xFFe83845);
 
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-const String kEmailNullError = "Por favor, ingresa tu email";
-const String kInvalidEmailError = "Por favor, ingresa un email válido";
-const String kPassNullError = "Por favor, ingresa tu contraseña";
+const String kEmailNullError = "Por favor, ingresá tu email";
+const String kInvalidEmailError = "Por favor, ingresá un email válido";
+const String kPassNullError = "Por favor, ingresá tu contraseña";
 const String kShortPassError = "La contraseña es demasiado corta";
 const String kWrongEmailPassword = "El email y/o la contraseña son incorrectos";
 
