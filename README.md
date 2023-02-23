@@ -1,16 +1,8 @@
 # green_armor_app
 
-A new Flutter project.
+App seguridad para GreenArmor
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![login_GA](https://user-images.githubusercontent.com/105453278/220932515-e12d6412-1953-4180-8dc1-29a863058da6.PNG)
+![home_GA](https://user-images.githubusercontent.com/105453278/220932514-1df44656-90c4-40b8-98cc-ab7e62835f46.PNG)
+![nfc_GA](https://user-images.githubusercontent.com/105453278/220932503-818dbfe8-b2ca-4084-ab44-309c1e80a054.PNG)
+![hombreVivo_GA](https://user-images.githubusercontent.com/105453278/220932511-72f45792-9d31-4e72-838e-77d716524d4b.PNG)
